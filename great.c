@@ -1,38 +1,27 @@
-//greatest number to be formed from given numbers
+//greatest number formed from a given numbers
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
 #include <stdlib.h>
-
-int swap(const void *c,const void *d){
-    int n1=*(int*)c;
-    int n2=*(int*)d;
-    
-    int a=pow(10,floor(log10(n2))+1)*n1+n2;
-    int b=pow(10,floor(log10(n1))+1)*n2+n1;
-    
-    if(n1==0) return 1;
-    if(a<b) return 1;
-    
-return 0;
+int compare(const void *a, const void *b)
+{
+	const char *X = (const char *)a;
+	const char *Y = (const char *)b;
+	int len = strlen(*X) + strlen(*Y) + 1;
+	char XY[len];
+	strcpy(XY, *X);
+	strcat(XY, *Y);
+	char YX[len];
+	strcpy(YX, *Y);
+	strcat(YX, *X);
+	return strcmp(YX, XY);
 }
 
-int main()
+int main(void)
 {
-	//code
-	    int n;
-	    scanf("%d",&n);
-	    
-	    int arr[n];
-	    for(int i=0;i<n;i++){
-	        scanf("%d",&arr[i]);
-	    }
-	    
-	    qsort(arr,n,sizeof(int),swap);
-	    
-        for(int i=0;i<n;i++) 
-	        printf("%d",arr[i]);
-
-	
+  char *arr[] = { "56", "65", "93", "92", "34", "82" };
+	int n = sizeof(arr)/sizeof(arr[0]);
+	qsort(arr, n, sizeof(arr[0]), compare);
+	for (int i = 0; i < n ; i++ )
+		printf("%s", arr[i]);
 	return 0;
 }
